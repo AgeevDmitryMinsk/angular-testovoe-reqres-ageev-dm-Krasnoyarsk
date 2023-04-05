@@ -1,6 +1,21 @@
-hello
-<div class="flex"></div>
+<div class="container p-10">
+  Тестовое задание. Агеев Дмитрий Минск 2023
 
-<h1 class="text-3xl font-bold underline border border-blue-600">
-  Hello world!
-</h1>
+  <div class="border border-blue-600">
+    <div>список пользователей</div>
+
+    <div *ngIf="users$ | async as users" class="m-2 border border-red-500">
+      <div>{{users | json}}</div>
+    </div>
+
+    <div *ngIf="usersData$ | async as usersData" class="m-2 border border-green-500">
+      <div>{{usersData | json}}</div>
+    </div>
+
+  </div>
+
+<!--  <div *ngIf="users$ | async as users">-->
+<!--    <app-users *ngFor="let user of users" [user]="user"></app-users>-->
+<!--  </div>-->
+
+</div>
