@@ -13,8 +13,8 @@ export class DataService {
   ) {
   }
 
-  getUsersData():Observable<IUsers>{
-    return this.http.get<IUsers>('https://reqres.in/api/users')
+  getUsersData(page:number):Observable<IUsers>{
+    return this.http.get<IUsers>(`https://reqres.in/api/users?page=${page}`)
   }
 
 

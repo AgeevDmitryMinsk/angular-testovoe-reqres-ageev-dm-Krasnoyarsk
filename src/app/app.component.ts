@@ -13,6 +13,8 @@ export class AppComponent implements OnInit{
   title = 'AngularTestovoeReqresAgeevDM';
   users$: Observable<IUsers>
   usersData$: Observable<IUserData[]>
+  pages$: Observable<number>
+  page: number = 1
 
   constructor(
     private dataService: DataService
@@ -20,11 +22,28 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.users$ = this.dataService.getUsersData()
-    this.usersData$ = this.dataService.getUsersData().pipe(
+    this.initializatePage()
+  }
+
+  changePage(number: number) {
+    this.page = number
+    this.initializatePage()
+  }
+
+  initializatePage(){
+    this.users$ = this.dataService.getUsersData(this.page)
+    this.usersData$ = this.dataService.getUsersData(this.page).pipe(
       map((value: IUsers)=>{
         return value.data
       })
     )
+
+    this.pages$ = this.dataService.getUsersData(this.page).pipe(
+      map((val: IUsers)=>{
+        console.log(val.total_pages)
+        return val.total_pages
+      })
+    )
   }
+
 }
