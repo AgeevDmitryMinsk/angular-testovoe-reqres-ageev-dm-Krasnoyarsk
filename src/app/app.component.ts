@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {map, Observable} from "rxjs";
-import {IUserData, IUsers} from "./components/interfaces/global";
+import {IColorData, IUserData} from "./components/interfaces/global";
 import {DataService} from "./components/services/data.service";
 
 
@@ -9,12 +8,24 @@ import {DataService} from "./components/services/data.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'AngularTestovoeReqresAgeevDM';
-  users$: Observable<IUsers>
-  usersData$: Observable<IUserData[]>
-  pages$: Observable<number>
-  page: number = 1
+export class AppComponent implements OnInit {
+
+
+  usersData: IUserData[]
+  userPages: number
+  colorsData: IColorData[]
+  colorPages: number
+  currentUserPage: number = 1
+  currentColorPage: number = 1
+  activeUserPage: string = '#800080'
+  notActiveUserPage: string = 'white'
+
+  activeColorPage: string = '#800080'
+  notActiveColorPage: string = 'white'
+
+
+  isUserPageDisabled: boolean
+  isColorPageDisabled: boolean
 
   constructor(
     private dataService: DataService
@@ -22,28 +33,43 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.initializatePage()
+    this.initializeUserPage()
+    this.initializeColorPage()
   }
 
-  changePage(number: number) {
-    this.page = number
-    this.initializatePage()
+  changeUsersPage(number: number) {
+    if(this.currentUserPage !==number) {
+      this.currentUserPage = number
+      this.initializeUserPage()
+      console.log("changeUsersPage changed")
+    }
   }
 
-  initializatePage(){
-    this.users$ = this.dataService.getUsersData(this.page)
-    this.usersData$ = this.dataService.getUsersData(this.page).pipe(
-      map((value: IUsers)=>{
-        return value.data
-      })
-    )
+  changeColorPage(number: number) {
+    if(this.currentColorPage !==number){
+      this.currentColorPage = number
+      this.initializeColorPage()
+      console.log("changeColorPage changed")
+    }
+  }
 
-    this.pages$ = this.dataService.getUsersData(this.page).pipe(
-      map((val: IUsers)=>{
-        console.log(val.total_pages)
-        return val.total_pages
-      })
-    )
+  initializeUserPage() {
+    this.isUserPageDisabled = true
+
+    this.dataService.getUsersData(this.currentUserPage).subscribe((value) => {
+      this.usersData = value.data
+      this.userPages = value.total_pages
+      this.isUserPageDisabled = false
+    })
+  }
+
+  initializeColorPage() {
+    this.isColorPageDisabled = true
+    this.dataService.getColorData(this.currentColorPage).subscribe((value) => {
+      this.colorsData = value.data
+      this.colorPages = value.total_pages
+      this.isColorPageDisabled = false
+    })
   }
 
 }
