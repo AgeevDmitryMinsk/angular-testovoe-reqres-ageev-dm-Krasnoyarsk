@@ -1,0 +1,39 @@
+<div *ngIf="userDetails">
+
+
+  <div class="container max-w-2xl mx-auto pt-5 py-4 px-6 rounded flex flex-col border items-center mb-2 mt-2">
+    <img src="{{userDetails.avatar}}"  class="h-[130px] object-cover" alt="{{userDetails.avatar}}">
+
+    <div  class="font-bold">{{userDetails.first_name}}</div>
+
+    <div class="font-bold">{{userDetails.last_name}}</div>
+    <div>email:</div>
+    <div>{{userDetails.email}}</div>
+  </div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <input type="text" id="first_name" formControlName="first_name">
+  </form>
+</div>
+
+<!--<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">-->
+
+<!--  <div>-->
+<!--    <label for="name">-->
+<!--      Name-->
+<!--    </label>-->
+<!--    <input id="name" type="text" formControlName="name">-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <label for="address">-->
+<!--      Address-->
+<!--    </label>-->
+<!--    <input id="address" type="text" formControlName="address">-->
+<!--  </div>-->
+
+<!--  <button class="button" type="submit">Purchase</button>-->
+
+<!--</form>-->
+
+

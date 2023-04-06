@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IColorData, IUserData, CommonResponseType} from "../interfaces/global";
+import {IColorData, IUserData, CommonResponseType, IUserDetails} from "../interfaces/global";
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,13 @@ export class DataService {
     return this.http.get<CommonResponseType<IColorData[]>>(`https://reqres.in/api/unknown?delay=1&page=${page}`)
   }
 
+  getUserDataDetails(id:number):Observable<IUserDetails>{
+    return this.http.get<IUserDetails>(`https://reqres.in/api/users/${id}`)
+  }
+
+  //PUT
+  changeUserDataDetails(id:number, body:IUserData):Observable<IUserDetails>{
+    return this.http.put<IUserDetails>(`https://reqres.in/api/users/${id}`, body)
+  }
 
 }

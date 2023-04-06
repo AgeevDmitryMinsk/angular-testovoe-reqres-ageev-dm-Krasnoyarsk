@@ -10,6 +10,14 @@ export interface CommonResponseType<T> {
   }
 }
 
+export interface IUserDetails{
+  data:IUserData
+  support: {
+    url: string,
+    text: string
+  }
+}
+
 export interface IUserData {
   id: number,
   email: string,
