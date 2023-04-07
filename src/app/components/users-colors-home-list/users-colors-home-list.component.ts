@@ -41,7 +41,7 @@ export class UsersColorsHomeListComponent implements OnInit{
     if(this.currentUserPage !==number) {
       this.currentUserPage = number
       this.initializeUserPage()
-      console.log("changeUsersPage changed")
+      //console.log("changeUsersPage changed")
     }
   }
 
@@ -49,7 +49,7 @@ export class UsersColorsHomeListComponent implements OnInit{
     if(this.currentColorPage !==number){
       this.currentColorPage = number
       this.initializeColorPage()
-      console.log("changeColorPage changed")
+      //console.log("changeColorPage changed")
     }
   }
 
