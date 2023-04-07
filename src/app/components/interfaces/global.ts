@@ -26,6 +26,15 @@ export interface IUserData {
   avatar: string
 }
 
+export interface IUserDataResponse {
+  id: number,
+  email: string,
+  first_name: string,
+  last_name: string,
+  avatar: string
+  updatedAt: string
+}
+
 export interface IColorData {
   id: number,
   name: string

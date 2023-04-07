@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IColorData, IUserData, CommonResponseType, IUserDetails} from "../interfaces/global";
+import {IColorData, IUserData, CommonResponseType, IUserDetails, IUserDataResponse} from "../interfaces/global";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,12 @@ export class DataService {
   }
 
   //PUT
-  changeUserDataDetails(id:number, body:IUserData):Observable<IUserDetails>{
-    return this.http.put<IUserDetails>(`https://reqres.in/api/users/${id}`, body)
+  changeUserDataDetails(id:number, body:IUserData):Observable<IUserDataResponse>{
+    return this.http.put<IUserDataResponse>(`https://reqres.in/api/users/${id}`, body)
+  }
+
+  deleteUserFromList(id:number):Observable<any>{
+    return this.http.delete(`https://reqres.in/api/users/${id}`)
   }
 
 }
